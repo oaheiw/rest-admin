@@ -77,10 +77,10 @@ class Datagrid extends Component {
     }
 
     render() {
-        const { resource, children, ids, isLoading, data, currentSort, basePath, styles = defaultStyles, muiTheme, rowStyle, options, headerOptions, bodyOptions, rowOptions } = this.props;
+        const { resource, children, ids, isLoading, data, currentSort, basePath, styles = defaultStyles, muiTheme, rowStyle, options, headerOptions, bodyOptions, rowOptions, bulkAction, onRowSelection } = this.props;
         return (
-            <Table style={options && options.fixedHeader ? null : styles.table} fixedHeader={false} {...options}>
-                <TableHeader displaySelectAll={false} adjustForCheckbox={false} {...headerOptions}>
+            <Table style={options && options.fixedHeader ? null : styles.table} fixedHeader={false} selectable={bulkAction} multiSelectable={bulkAction} onRowSelection={onRowSelection} {...options}>
+                <TableHeader displaySelectAll={bulkAction} adjustForCheckbox={bulkAction} enableSelectAll={bulkAction} {...headerOptions}>
                     <TableRow style={muiTheme.tableRow}>
                         {React.Children.map(children, (field, index) => (
                             <DatagridHeaderCell
@@ -95,7 +95,7 @@ class Datagrid extends Component {
                         ))}
                     </TableRow>
                 </TableHeader>
-                <DatagridBody resource={resource} ids={ids} data={data} basePath={basePath} styles={styles} rowStyle={rowStyle} isLoading={isLoading} options={bodyOptions} rowOptions={rowOptions}>
+                <DatagridBody resource={resource} ids={ids} data={data} basePath={basePath} styles={styles} rowStyle={rowStyle} isLoading={isLoading} options={bodyOptions} rowOptions={rowOptions} displayRowCheckbox={bulkAction}>
                     {children}
                 </DatagridBody>
             </Table>

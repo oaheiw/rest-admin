@@ -139,6 +139,16 @@ export class List extends Component {
 
     setFilters = filters => this.changeParams({ type: SET_FILTER, payload: filters });
 
+    onRowSelection = key => {
+        if (key === 'all') {
+            console.log('All selected');
+        } else if (key === 'none' || key.length === 0) {
+            console.log('Nothing selected');
+        } else {
+            console.log(key);
+        }
+    }
+
     showFilter = (filterName, defaultValue) => {
         this.setState({ [filterName]: true });
         if (typeof defaultValue !== 'undefined') {
@@ -158,7 +168,7 @@ export class List extends Component {
     }
 
     render() {
-        const { filters, pagination = <DefaultPagination />, actions = <DefaultActions />, resource, hasCreate, title, data, ids, total, children, isLoading, translate } = this.props;
+        const { filters, pagination = <DefaultPagination />, actions = <DefaultActions />, resource, hasCreate, title, data, ids, total, children, isLoading, translate, bulkAction } = this.props;
         const { key } = this.state;
         const query = this.getQuery();
         const filterValues = query.filter;
@@ -174,6 +184,9 @@ export class List extends Component {
         return (
             <div className="list-page">
                 <Card style={{ opacity: isLoading ? 0.8 : 1 }} key={key}>
+                    {bulkAction && <div>test</div>
+
+                    }
                     {actions && React.cloneElement(actions, {
                         resource,
                         filters,
@@ -203,6 +216,9 @@ export class List extends Component {
                                 basePath,
                                 isLoading,
                                 setSort: this.setSort,
+                                bulkAction,
+                                onRowSelection: this.onRowSelection,
+                                
                             })}
                             { pagination && React.cloneElement(pagination, {
                                 total,
@@ -233,6 +249,7 @@ List.propTypes = {
         order: PropTypes.string,
     }),
     children: PropTypes.element.isRequired,
+    bulkAction: PropTypes.bool,
     // the props managed by admin-on-rest
     changeListParams: PropTypes.func.isRequired,
     crudGetList: PropTypes.func.isRequired,

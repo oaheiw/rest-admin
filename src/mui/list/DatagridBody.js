@@ -4,10 +4,10 @@ import shouldUpdate from 'recompose/shouldUpdate';
 import { TableBody, TableRow } from 'material-ui/Table';
 import DatagridCell from './DatagridCell';
 
-const DatagridBody = ({ resource, children, ids, data, basePath, styles, rowStyle, options, rowOptions, ...rest }) => (
-    <TableBody displayRowCheckbox={false} className="datagrid-body" {...rest} {...options}>
+const DatagridBody = ({ resource, children, ids, data, basePath, styles, rowStyle, options, rowOptions, displayRowCheckbox, ...rest }) => (
+    <TableBody displayRowCheckbox={displayRowCheckbox} className="datagrid-body" {...rest} {...options}>
         {ids.map((id, rowIndex) => (
-            <TableRow style={rowStyle ? rowStyle(data[id], rowIndex) : styles.tr} key={id} selectable={false} {...rowOptions}>
+            <TableRow style={rowStyle ? rowStyle(data[id], rowIndex) : styles.tr} key={id} selectable={displayRowCheckbox} {...rowOptions}>
                 {React.Children.map(children, (field, index) => (
                     <DatagridCell
                         key={`${id}-${field.props.source || index}`}
