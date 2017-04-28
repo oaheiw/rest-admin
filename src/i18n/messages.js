@@ -10,6 +10,7 @@ export default {
             cancel: 'Cancel',
             refresh: 'Refresh',
             add_filter: 'Add filter',
+            bulk_action: 'Bulk action',
             remove_filter: 'Remove this filter',
         },
         boolean: {

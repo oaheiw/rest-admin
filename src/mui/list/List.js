@@ -167,6 +167,10 @@ export class List extends Component {
         this.props.changeListParams(this.props.resource, newParams);
     }
 
+    startAction = (key, defaultValue) => {
+        console.log(key, defaultValue);
+    }
+
     render() {
         const { filters, pagination = <DefaultPagination />, actions = <DefaultActions />, resource, hasCreate, title, data, ids, total, children, isLoading, translate, bulkAction } = this.props;
         const { key } = this.state;
@@ -184,9 +188,6 @@ export class List extends Component {
         return (
             <div className="list-page">
                 <Card style={{ opacity: isLoading ? 0.8 : 1 }} key={key}>
-                    {bulkAction && <div>test</div>
-
-                    }
                     {actions && React.cloneElement(actions, {
                         resource,
                         filters,
@@ -196,6 +197,8 @@ export class List extends Component {
                         displayedFilters: this.state,
                         showFilter: this.showFilter,
                         refresh: this.refresh,
+                        bulkAction,
+                        startAction: this.startAction,
                     })}
                     <ViewTitle title={titleElement} />
                     {filters && React.cloneElement(filters, {
@@ -216,7 +219,7 @@ export class List extends Component {
                                 basePath,
                                 isLoading,
                                 setSort: this.setSort,
-                                bulkAction,
+                                isBulkAction: (bulkAction !== undefined),
                                 onRowSelection: this.onRowSelection,
                                 
                             })}
@@ -249,7 +252,7 @@ List.propTypes = {
         order: PropTypes.string,
     }),
     children: PropTypes.element.isRequired,
-    bulkAction: PropTypes.bool,
+    bulkAction: PropTypes.element,
     // the props managed by admin-on-rest
     changeListParams: PropTypes.func.isRequired,
     crudGetList: PropTypes.func.isRequired,
