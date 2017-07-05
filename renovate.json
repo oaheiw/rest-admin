@@ -1,5 +1,6 @@
 {
   "enabled": true,
+  "groupName": "all",
   "timezone": "Etc/UTC",
   "schedule": [],
   "packageFiles": [],
