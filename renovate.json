@@ -1,6 +1,7 @@
 {
   "enabled": true,
   "groupName": "all",
+  "prCreation": "not-pending",
   "timezone": "Etc/UTC",
   "schedule": [],
   "packageFiles": [],
