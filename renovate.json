@@ -9,7 +9,7 @@
     "optionalDependencies"
   ],
   "ignoreDeps": [],
-  "pinVersions": true,
+  "pinVersions": false,
   "separateMajorReleases": true,
   "semanticCommits": false,
   "semanticPrefix": "chore: ",
