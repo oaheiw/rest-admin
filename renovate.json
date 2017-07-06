@@ -16,7 +16,6 @@
   "semanticCommits": false,
   "semanticPrefix": "chore: ",
   "rebaseStalePrs": false,
-  "prCreation": "immediate",
   "automerge": "none",
   "branchName": "renovate/{{depName}}-{{newVersionMajor}}.x",
   "commitMessage": "{{semanticPrefix}}Update dependency {{depName}} to version {{newVersion}}",
